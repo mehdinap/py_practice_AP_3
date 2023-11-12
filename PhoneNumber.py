@@ -2,7 +2,7 @@ class PhoneNumber:
     countryCode: str = ""
     number: str = ""
 
-    def __init__(self, countryCode: str, number: str) -> None:
+    def __init__(self, countryCode: str = not None, number: str = not None) -> None:
         self.countryCode = countryCode
         self.number = number
 

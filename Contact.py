@@ -21,10 +21,14 @@ class Contact:
         self.address = address
 
     def info(self) -> str:
-        return (f"name: {self.firstName} {self.lastName}"
-                , f"\n\tgroup: {self.group}\n\temail: {self.email}"
-                , f"\n\t{self.phoneNumber.info()}\n\t{self.address.info()}"
-                )
+        return f"name: {self.firstName} {self.lastName} \
+                \n\tgroup: {self.group}\n\temail: {self.email} \
+                \n\t{self.phoneNumber.info()}\n\t{self.address.info()}"
+
+    def to_file(self) -> str:
+        return (f"{self.group}!{self.email}!{self.firstName}!{self.lastName}!"
+                f"{self.phoneNumber.countryCode}!{self.phoneNumber.number}!"
+                f"{self.address.zipCode}!{self.address.country}!{self.address.city}")
 
 
 if __name__ == "__main__":

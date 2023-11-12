@@ -1,4 +1,6 @@
+import Address
 import Contact
+import PhoneNumber
 
 
 class PhoneBook:
@@ -15,23 +17,22 @@ class PhoneBook:
 
     def deleteContact(self, firstname: str, lastname: str) -> bool:
         for i in self.contact:
-            if (Contact.Contact(i).firstName.__eq__(firstname) and
-                    Contact.Contact(i).lastName.__eq__(lastname)):
+            if (i.firstName.__eq__(firstname) and
+                    i.lastName.__eq__(lastname)):
                 self.contact.remove(i)
                 return True
         return False
 
     def findContact(self, firstname: str, lastname: str) -> Contact:
         for i in self.contact:
-            if (Contact.Contact(i).firstName.__eq__(firstname) and
-                    Contact.Contact(i).lastName.__eq__(lastname)):
+            if i.firstName.__eq__(firstname) and i.lastName.__eq__(lastname):
                 return i
         return None
 
     def findContacts(self, group: str) -> list:
         lis = []
         for i in self.contact:
-            if (Contact.Contact(i).group.__eq__(group)):
+            if (i.group.__eq__(group)):
                 lis.append(i)
         if lis.__len__() == 0:
             return None
@@ -39,11 +40,22 @@ class PhoneBook:
 
     def file_read(self) -> None:
         with open("storage/contacts", "r") as file:
-            list = file.readlines(2)
-            print(list)
+            while True:
+                try:
+                    file_contact = make_contact(file.__next__().split("!"))
+                except StopIteration:
+                    break
+                self.contact.append(file_contact)
 
     def file_write(self) -> None:
         with open("storage/contacts", "w") as file:
             file.flush()
             for i in self.contact:
-                file.write(str(i.info()))
+                file.write(str(i.to_file()))
+
+
+def make_contact(info: list) -> Contact.Contact:
+    return Contact.Contact(info[0], info[1], info[2],
+                           info[3], PhoneNumber.PhoneNumber(info[4], info[5]),
+                           Address.Address(info[6], info[7], info[8])
+                           )

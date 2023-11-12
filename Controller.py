@@ -40,18 +40,20 @@ def makeContact() -> Contact.Contact:
 def deleteContact(phonebook: PhoneBook.PhoneBook) -> str:
     first, last = input("enter <first name> <last name>:").split(" ")
     if phonebook.deleteContact(first, last):
-        # phonebook.file_write()
-        return "OK"
+        phonebook.file_write()
+        return "\n\tOK"
     else:
-        return "Not found"
+        return "\n\tNot found"
 
 
 def print_group(phonebook: PhoneBook.PhoneBook) -> None:
     lis = get_group(phonebook)
-    if lis.__eq__("None"):
-        print("Not find")
+    if lis == None:
+        print("\n\tNot find")
+        return
     for i in lis:
-        print("\t", Contact.Contact(i).info())
+        print("\t", i.info(), "\n\t=============")
+    print("\t\t<<<end of list>>>")
 
 
 def get_group(phonebook: PhoneBook.PhoneBook) -> list:
@@ -69,7 +71,8 @@ def print_contact(phonebook: PhoneBook.PhoneBook) -> str:
 
 def print_contacts(phonebook: PhoneBook.PhoneBook) -> None:
     for i in phonebook.contact:
-        print("\t", Contact.Contact(i).info())
+        print("\t", i.info(), "\n\t=============")
+    print("\t\t<<<end of list>>>")
 
 
 def exit() -> None:

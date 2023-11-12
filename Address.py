@@ -3,7 +3,7 @@ class Address:
     country: str = ""
     city: str = ""
 
-    def __init__(self, zCode: str, country: str, city: str) -> None:
+    def __init__(self, zCode: str = not None, country: str = not None, city: str = not None) -> None:
         self.zipCode = zCode
         self.country = country
         self.city = city
